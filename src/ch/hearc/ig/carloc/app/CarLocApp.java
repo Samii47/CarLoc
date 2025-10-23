@@ -5,6 +5,8 @@ import ch.hearc.ig.carloc.business.Tarif;
 import ch.hearc.ig.carloc.business.TypeMotorisation;
 import ch.hearc.ig.carloc.business.Voiture;
 import ch.hearc.ig.carloc.service.VehiculeService;
+import ch.hearc.ig.carloc.datastructure.ArrayList;
+import ch.hearc.ig.carloc.datastructure.List;
 
 public class CarLocApp {
     public static void main(String[] args) {
@@ -76,6 +78,21 @@ public class CarLocApp {
             VehiculeService.supprimerVoiture("XX9999");
         } catch (IllegalArgumentException e) {
             System.out.println("\nException attrapée : " + e.getMessage());
+        }
+        // Test d'index invalide sur ArrayList (IndexOutOfBoundsException)
+        List<Voiture> listeTest = new ArrayList<>();
+        try {
+            // Tentative d'ajout à l'index 1 dans une liste vide (seul index valide: 0)
+            listeTest.add(1, new Voiture(
+                    "TEST123",
+                    "Voiture Test",
+                    2020,
+                    "TEST",
+                    Statut.DISPONIBLE,
+                    new Tarif(50, "CHF"),
+                    TypeMotorisation.THERMIQUE));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Exception attrapée : " + e.getMessage());
         }
     }
 }
