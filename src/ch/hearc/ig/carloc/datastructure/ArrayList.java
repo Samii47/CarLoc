@@ -98,7 +98,7 @@ public class ArrayList<E> implements List<E> {
         E temp = elements[i];
 
         for (int j = i; j < size - 1; j++) {
-            elements[j + 1] = elements[j];
+            elements[j] = elements[j + 1];
         }
         elements[size - 1] = null;
         size--;
