@@ -11,6 +11,8 @@ import ch.hearc.ig.carloc.datastructure.List;
 public class CarLocApp {
     public static void main(String[] args) {
 
+        VehiculeService service = new VehiculeService();
+
         Voiture voiture1 = new Voiture(
                 "BE9351",
                 "Audi",
@@ -38,9 +40,9 @@ public class CarLocApp {
                 new Tarif(30, "CHF"),
                 TypeMotorisation.ELECTRIQUE);
         try {
-            VehiculeService.ajouterVoiture(voiture1);
-            VehiculeService.ajouterVoiture(voiture2);
-            VehiculeService.ajouterVoiture(voiture3);
+            service.ajouterVoiture(voiture1);
+            service.ajouterVoiture(voiture2);
+            service.ajouterVoiture(voiture3);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -48,34 +50,34 @@ public class CarLocApp {
 
         // Affichage de toutes les voitures
         System.out.println("\nAffichage de toutes les voitures :");
-        VehiculeService.afficherVoitures(null);
+        service.afficherVoitures(null);
 
         // Affichage des voitures DISPONIBLE
         System.out.println("\nAffichage des voitures DISPONIBLE :");
-        VehiculeService.afficherVoitures(Statut.DISPONIBLE);
+        service.afficherVoitures(Statut.DISPONIBLE);
 
         // Test ajout d'une voiture existante (uniquement même immatriculation)
         try {
             Voiture voitureDupliquee = new Voiture("BE9351", "Tesla", 2022, "SUV", Statut.DISPONIBLE, new Tarif(110, "CHF"), TypeMotorisation.ELECTRIQUE);
-            VehiculeService.ajouterVoiture(voitureDupliquee);
+            service.ajouterVoiture(voitureDupliquee);
         } catch (IllegalArgumentException e) {
             System.out.println("\nException attrapée : " + e.getMessage());
         }
 
         // Suppression d'une voiture (selon immatriculation)
         try {
-            VehiculeService.supprimerVoiture("JU24491");
+            service.supprimerVoiture("JU24491");
         } catch (IllegalArgumentException e) {
             System.out.println("\nException attrapée : " + e.getMessage());
         }
 
         // Affichage après suppression
         System.out.println("\nAprès suppression d'une voiture :");
-        VehiculeService.afficherVoitures(null);
+        service.afficherVoitures(null);
 
         // Test suppression d'une voiture qui n'existe pas
         try {
-            VehiculeService.supprimerVoiture("XX9999");
+            service.supprimerVoiture("XX9999");
         } catch (IllegalArgumentException e) {
             System.out.println("\nException attrapée : " + e.getMessage());
         }

@@ -5,11 +5,14 @@ import ch.hearc.ig.carloc.business.Statut;
 import ch.hearc.ig.carloc.datastructure.ArrayList;
 import ch.hearc.ig.carloc.datastructure.List;
 
-public class VehiculeService {
+import java.security.Provider;
 
-    private static List<Voiture> voitures = new ArrayList<>();
+public class VehiculeService implements VehiculeServiceInterface {
 
-    public static void ajouterVoiture(Voiture voiture) {
+    private List<Voiture> voitures = new ArrayList<>();
+
+    @Override
+    public  void ajouterVoiture(Voiture voiture) {
         // Vérification : voiture null
         if (voiture == null) {
             throw new IllegalArgumentException("Impossible d'ajouter une voiture nulle.");
@@ -28,7 +31,8 @@ public class VehiculeService {
                 " (" + voiture.getMarque() + ")");
     }
 
-    public static void supprimerVoiture(String immatriculation) {
+    @Override
+    public void supprimerVoiture(String immatriculation) {
         // Recherche de la voiture par immatriculation
         for (int i = 0; i < voitures.size(); i++) {
             if (voitures.get(i).getImmatriculation().equals(immatriculation)) {
@@ -42,7 +46,8 @@ public class VehiculeService {
                 immatriculation + " n'a été trouvée dans le parc.");
     }
 
-    public static void afficherVoitures(Statut statut) {
+    @Override
+    public void afficherVoitures(Statut statut) {
         if (voitures.isEmpty()) {
             System.out.println("\nAucune voiture dans le parc.");
             return;
@@ -68,7 +73,7 @@ public class VehiculeService {
         System.out.println("--------------");
     }
 
-    public static List<Voiture> getToutesLesVoitures() {
+    public List<Voiture> getToutesLesVoitures() {
         return voitures;
     }
 
