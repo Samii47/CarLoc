@@ -8,6 +8,13 @@ import ch.hearc.ig.carloc.service.VehiculeService;
 import ch.hearc.ig.carloc.datastructure.ArrayList;
 import ch.hearc.ig.carloc.datastructure.List;
 
+/**
+ * Classe principale de l'App CarLoc.
+ * Permet de gérer un parc de véhicules de location avec les fonctionnalités
+ * d'ajout, de suppression et d'affichage des voitures.
+ *
+ * @author Sami.Cögür
+ */
 public class CarLocApp {
     public static void main(String[] args) {
 
@@ -39,6 +46,8 @@ public class CarLocApp {
                 Statut.EN_MAINTENANCE,
                 new Tarif(30, "CHF"),
                 TypeMotorisation.ELECTRIQUE);
+
+        // ajout des voitures au parc (à la liste)
         try {
             service.ajouterVoiture(voiture1);
             service.ajouterVoiture(voiture2);
@@ -56,7 +65,7 @@ public class CarLocApp {
         System.out.println("\nAffichage des voitures DISPONIBLE :");
         service.afficherVoitures(Statut.DISPONIBLE);
 
-        // Test ajout d'une voiture existante (uniquement même immatriculation)
+        // Test ajout d'une voiture existante avec immatriculation
         try {
             Voiture voitureDupliquee = new Voiture("BE9351", "Tesla", 2022, "SUV", Statut.DISPONIBLE, new Tarif(110, "CHF"), TypeMotorisation.ELECTRIQUE);
             service.ajouterVoiture(voitureDupliquee);
@@ -84,7 +93,7 @@ public class CarLocApp {
         // Test d'index invalide sur ArrayList (IndexOutOfBoundsException)
         List<Voiture> listeTest = new ArrayList<>();
         try {
-            // Tentative d'ajout à l'index 1 dans une liste vide (seul index valide: 0)
+            // Tentative d'ajout à l'index 1 dans une liste vide
             listeTest.add(1, new Voiture(
                     "TEST123",
                     "Voiture Test",

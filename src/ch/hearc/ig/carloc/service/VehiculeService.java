@@ -5,12 +5,26 @@ import ch.hearc.ig.carloc.business.Statut;
 import ch.hearc.ig.carloc.datastructure.ArrayList;
 import ch.hearc.ig.carloc.datastructure.List;
 
-import java.security.Provider;
+/**
+ * Service de gestion du parc de véhicules
+ * Fournit les fonctionnalités pour ajouter, supprimer et afficher des voitures
+ * Implémente l'interface VehiculeServiceInterface
+ */
 
 public class VehiculeService implements VehiculeServiceInterface {
 
+    // Liste contenant toutes les voitures du parc
     private List<Voiture> voitures = new ArrayList<>();
 
+
+    /**
+     * Ajoute une voiture au parc
+     * Vérifie que la voiture n'est pas nulle et qu'elle n'existe pas déjà (selon immatriculation)
+     *
+     * @param voiture La voiture à ajouter
+     * @throws IllegalArgumentException si la voiture est null ou si une voiture
+     * avec la même immatriculation existe déjà
+     */
     @Override
     public  void ajouterVoiture(Voiture voiture) {
         // Vérification : voiture null
@@ -31,6 +45,12 @@ public class VehiculeService implements VehiculeServiceInterface {
                 " (" + voiture.getMarque() + ")");
     }
 
+    /**
+     * Supprime une voiture du parc en se basant sur son immatriculation.
+     *
+     * @param immatriculation L'immatriculation de la voiture à supprimer
+     * @throws IllegalArgumentException si aucune voiture avec cette immatriculation est trouvée dans le parc
+     */
     @Override
     public void supprimerVoiture(String immatriculation) {
         // Recherche de la voiture par immatriculation
@@ -39,13 +59,19 @@ public class VehiculeService implements VehiculeServiceInterface {
                 Voiture voitureSuppr = voitures.remove(i);
                 System.out.println("\nVoiture supprimée : " + voitureSuppr.getImmatriculation() +
                         " (" + voitureSuppr.getMarque() + ")");
-                return;  // Sortie de la méthode après suppression
+                return;
             }
         }
         throw new IllegalArgumentException("\nAucune voiture avec l'immatriculation " +
                 immatriculation + " n'a été trouvée dans le parc.");
     }
 
+    /**
+     * Affiche les voitures du parc, avec possibilité de filtrer par statut
+     * Si le statut est null, affiche toutes les voitures sans filtre.
+     *
+     * @param statut Le statut pour filtrer les voitures ou null pour afficher toutes les voitures
+     */
     @Override
     public void afficherVoitures(Statut statut) {
         if (voitures.isEmpty()) {
@@ -73,6 +99,11 @@ public class VehiculeService implements VehiculeServiceInterface {
         System.out.println("--------------");
     }
 
+    /**
+     * Retourne la liste complète de toutes les voitures du parc
+     *
+     * @return La liste des voitures
+     */
     public List<Voiture> getToutesLesVoitures() {
         return voitures;
     }

@@ -1,5 +1,10 @@
 package ch.hearc.ig.carloc.business;
 
+/**
+ * Classe abstraite représentant un véhicule
+ *
+ * @author Sami.Cögür
+ */
 public abstract class Vehicule {
     private String immatriculation;
     private String marque;
@@ -9,6 +14,18 @@ public abstract class Vehicule {
     private Tarif tarif;
     private TypeMotorisation typeMotorisation;
 
+
+    /**
+     * Constructeur de la classe Vehicule
+     *
+     * @param immatriculation L'immatriculation unique du véhicule
+     * @param marque La marque du véhicule
+     * @param annee L'année de fabrication
+     * @param categorie La catégorie du véhicule (ex: CITADINE, SUV)
+     * @param statut Le statut actuel du véhicule (ex: DISPONIBLE)
+     * @param tarif Le tarif de location journalier
+     * @param typeMotorisation Le type de motorisation du véhicule
+     */
     public Vehicule(String immatriculation, String marque, int annee, String categorie, Statut  statut, Tarif tarif, TypeMotorisation typeMotorisation) {
         this.immatriculation = immatriculation;
         this.marque = marque;
@@ -19,39 +36,94 @@ public abstract class Vehicule {
         this.typeMotorisation = typeMotorisation;
     }
 
+    /**
+     * Retourne l'immatriculation du véhicule
+     *
+     * @return L'immatriculation
+     */
     public String getImmatriculation() {
         return immatriculation;
     }
 
+    /**
+     * Retourne la marque du véhicule
+     *
+     * @return La marque
+     */
     public String getMarque() {
         return marque;
     }
 
+    /**
+     * Retourne l'année de fabrication du véhicule
+     *
+     * @return L'année
+     */
     public int getAnnee() {
         return annee;
     }
 
+    /**
+     * Retourne la catégorie du véhicule
+     *
+     * @return La catégorie
+     */
     public String getCategorie() {
         return categorie;
     }
 
+    /**
+     * Retourne le statut du véhicule
+     *
+     * @return Le statut
+     */
     public Statut getStatut() {
         return statut;
     }
+
+    /**
+     * Modifie le statut du véhicule
+     *
+     * @param statut le nouveau statut
+     */
     public void setStatut(Statut statut) {
         this.statut = statut;
     }
+
+    /**
+     * Retourne le tarif de location du véhicule
+     *
+     * @return Le tarif
+     */
     public Tarif getTarif() {
         return tarif;
     }
+
+    /**
+     * Modifie le tarif de location du véhicule
+     *
+     * @param tarif Le nouveau tarif
+     */
     public void setTarif(Tarif tarif) {
         this.tarif = tarif;
     }
+
+    /**
+     * Retourne le type de motorisation du véhicule
+     *
+     * @return Le type de motorisation
+     */
     public TypeMotorisation getTypeMotorisation() {
         return typeMotorisation;
     }
 
-
+    /**
+     * Compare ce véhicule avec un autre objet pour vérifier l'égalité
+     * Deux véhicules sont égaux s'ils ont la même immatriculation
+     *
+     * @param obj L'objet à comparer
+     * @return true si les immatriculations sont identiques, sinon false
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -60,12 +132,21 @@ public abstract class Vehicule {
         return this.immatriculation.equals(autre.immatriculation);
     }
 
-
+    /**
+     * Génère un code de hachage pour ce véhicule basé sur son immatriculation
+     *
+     * @return Le code de hachage
+     */
     @Override
     public int hashCode() {
         return immatriculation.hashCode();
     }
 
+    /**
+     * Retourne une représentation textuelle du véhicule
+     *
+     * @return Une chaîne contenant les informations du véhicule
+     */
     @Override
     public String toString() {
         return "Vehicule [" +
