@@ -1,6 +1,6 @@
 package ch.hearc.ig.carloc.service;
 
-import ch.hearc.ig.carloc.business.Voiture;
+import ch.hearc.ig.carloc.business.Vehicule;
 import ch.hearc.ig.carloc.business.Statut;
 import ch.hearc.ig.carloc.datastructure.ArrayList;
 import ch.hearc.ig.carloc.datastructure.List;
@@ -13,36 +13,36 @@ import ch.hearc.ig.carloc.datastructure.List;
 
 public class VehiculeService implements VehiculeServiceInterface {
 
-    // Liste contenant toutes les voitures du parc
-    private List<Voiture> voitures = new ArrayList<>();
+    // Liste contenant tout les véhicules du parc
+    private List<Vehicule> vehicules = new ArrayList<>();
 
 
     /**
      * Ajoute une voiture au parc
      * Vérifie que la voiture n'est pas nulle et qu'elle n'existe pas déjà (selon immatriculation)
      *
-     * @param voiture La voiture à ajouter
+     * @param vehicule La voiture à ajouter
      * @throws IllegalArgumentException si la voiture est null ou si une voiture
      * avec la même immatriculation existe déjà
      */
     @Override
-    public  void ajouterVoiture(Voiture voiture) {
-        // Vérification : voiture null
-        if (voiture == null) {
-            throw new IllegalArgumentException("Impossible d'ajouter une voiture nulle.");
+    public void ajouterVehicule(Vehicule vehicule) {
+        // Vérification : vehicule null
+        if (vehicule == null) {
+            throw new IllegalArgumentException("Impossible d'ajouter un véhicule nul.");
         }
 
-        // Vérification : voiture déjà existante (même immatriculation)
-        for (int i = 0; i < voitures.size(); i++) {
-            if (voitures.get(i).getImmatriculation().equals(voiture.getImmatriculation())) {
-                throw new IllegalArgumentException("Une voiture avec l'immatriculation " +
-                        voiture.getImmatriculation() + " existe déjà dans le parc.");
+        // Vérification : véhicule déjà existant (même immatriculation)
+        for (int i = 0; i < vehicules.size(); i++) {
+            if (vehicules.get(i).getImmatriculation().equals(vehicule.getImmatriculation())) {
+                throw new IllegalArgumentException("Un véhicule avec l'immatriculation " +
+                        vehicule.getImmatriculation() + " existe déjà dans le parc.");
             }
         }
 
-        voitures.add(voiture);
-        System.out.println("Voiture ajoutée : " + voiture.getImmatriculation() +
-                " (" + voiture.getMarque() + ")");
+        vehicules.add(vehicule);
+        System.out.println("Véhicule ajouté : " + vehicule.getImmatriculation() +
+                " (" + vehicule.getMarque() + " - " + vehicule.getTypeVehicule() + ")");
     }
 
     /**
@@ -52,18 +52,18 @@ public class VehiculeService implements VehiculeServiceInterface {
      * @throws IllegalArgumentException si aucune voiture avec cette immatriculation est trouvée dans le parc
      */
     @Override
-    public void supprimerVoiture(String immatriculation) {
-        // Recherche de la voiture par immatriculation
-        for (int i = 0; i < voitures.size(); i++) {
-            if (voitures.get(i).getImmatriculation().equals(immatriculation)) {
-                Voiture voitureSuppr = voitures.remove(i);
-                System.out.println("\nVoiture supprimée : " + voitureSuppr.getImmatriculation() +
-                        " (" + voitureSuppr.getMarque() + ")");
+    public void supprimerVehicule(String immatriculation) {
+        // Recherche du véhicule par immatriculation
+        for (int i = 0; i < vehicules.size(); i++) {
+            if (vehicules.get(i).getImmatriculation().equals(immatriculation)) {
+                Vehicule vehiculeSuppr = vehicules.remove(i);
+                System.out.println("\nVéhicule supprimé : " + vehiculeSuppr.getImmatriculation() +
+                        " (" + vehiculeSuppr.getMarque() + " - " + vehiculeSuppr.getTypeVehicule() + ")");
                 return;
             }
         }
-        throw new IllegalArgumentException("\nAucune voiture avec l'immatriculation " +
-                immatriculation + " n'a été trouvée dans le parc.");
+        throw new IllegalArgumentException("\nAucun véhicule avec l'immatriculation " +
+                immatriculation + " n'a été trouvé dans le parc.");
     }
 
     /**
@@ -73,18 +73,18 @@ public class VehiculeService implements VehiculeServiceInterface {
      * @param statut Le statut pour filtrer les voitures ou null pour afficher toutes les voitures
      */
     @Override
-    public void afficherVoitures(Statut statut) {
-        if (voitures.isEmpty()) {
-            System.out.println("\nAucune voiture dans le parc.");
+    public void afficherVehicules(Statut statut) {
+        if (vehicules.isEmpty()) {
+            System.out.println("\nAucun véhicule dans le parc.");
             return;
         }
 
-        System.out.println("--- Parc de Voiture ---");
+        System.out.println("--- Parc de Véhicules ---");
 
         int compteur = 0;
 
-        for (int i = 0; i < voitures.size(); i++) {
-            Voiture v = voitures.get(i);
+        for (int i = 0; i < vehicules.size(); i++) {
+            Vehicule v = vehicules.get(i);
 
             // Si pas de filtre OU si le statut correspond
             if (statut == null || v.getStatut() == statut) {
@@ -93,7 +93,7 @@ public class VehiculeService implements VehiculeServiceInterface {
             }
         }
         if (compteur == 0 && statut != null) {
-            System.out.println("\nAucune voiture avec le statut : " + statut);
+            System.out.println("\nAucun véhicule avec le statut : " + statut);
         }
 
         System.out.println("--------------");
@@ -104,8 +104,8 @@ public class VehiculeService implements VehiculeServiceInterface {
      *
      * @return La liste des voitures
      */
-    public List<Voiture> getToutesLesVoitures() {
-        return voitures;
+    public List<Vehicule> getTousLesVehicules() {
+        return vehicules;
     }
 
 }

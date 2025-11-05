@@ -4,6 +4,9 @@ import ch.hearc.ig.carloc.business.Statut;
 import ch.hearc.ig.carloc.business.Tarif;
 import ch.hearc.ig.carloc.business.TypeMotorisation;
 import ch.hearc.ig.carloc.business.Voiture;
+import ch.hearc.ig.carloc.business.Camion;
+import ch.hearc.ig.carloc.business.Moto;
+import ch.hearc.ig.carloc.business.Vehicule;
 import ch.hearc.ig.carloc.service.VehiculeService;
 import ch.hearc.ig.carloc.datastructure.ArrayList;
 import ch.hearc.ig.carloc.datastructure.List;
@@ -11,7 +14,7 @@ import ch.hearc.ig.carloc.datastructure.List;
 /**
  * Classe principale de l'App CarLoc.
  * Permet de gérer un parc de véhicules de location avec les fonctionnalités
- * d'ajout, de suppression et d'affichage des voitures.
+ * d'ajout, de suppression et d'affichage des véhicules.
  *
  * @author Sami.Cögür
  */
@@ -20,6 +23,7 @@ public class CarLocApp {
 
         VehiculeService service = new VehiculeService();
 
+        // Création de différents types de véhicules (POLYMORPHISME !)
         Voiture voiture1 = new Voiture(
                 "BE9351",
                 "Audi",
@@ -38,62 +42,98 @@ public class CarLocApp {
                 new Tarif(60, "CHF"),
                 TypeMotorisation.HYBRIDE);
 
-        Voiture voiture3 = new Voiture(
-                "NE4567",
-                "DACIA",
-                2018,
+        Camion camion1 = new Camion(
+                "VD7788",
+                "Volvo",
+                2020,
+                "POIDS LOURD",
+                Statut.DISPONIBLE,
+                new Tarif(120, "CHF"),
+                TypeMotorisation.THERMIQUE);
+
+        Camion camion2 = new Camion(
+                "FR3344",
+                "MAN",
+                2022,
                 "UTILITAIRE",
                 Statut.EN_MAINTENANCE,
-                new Tarif(30, "CHF"),
+                new Tarif(95, "CHF"),
+                TypeMotorisation.THERMIQUE);
+
+        Moto moto1 = new Moto(
+                "GE5566",
+                "Harley-Davidson",
+                2023,
+                "SPORTIVE",
+                Statut.DISPONIBLE,
+                new Tarif(75, "CHF"),
+                TypeMotorisation.THERMIQUE);
+
+        Moto moto2 = new Moto(
+                "NE9988",
+                "Yamaha",
+                2024,
+                "ROUTIERE",
+                Statut.LOUEE,
+                new Tarif(65, "CHF"),
                 TypeMotorisation.ELECTRIQUE);
 
-        // ajout des voitures au parc (à la liste)
+        // Ajout des véhicules au parc (POLYMORPHISME : tous traités comme des Vehicule)
         try {
-            service.ajouterVoiture(voiture1);
-            service.ajouterVoiture(voiture2);
-            service.ajouterVoiture(voiture3);
+            service.ajouterVehicule(voiture1);
+            service.ajouterVehicule(voiture2);
+            service.ajouterVehicule(camion1);
+            service.ajouterVehicule(camion2);
+            service.ajouterVehicule(moto1);
+            service.ajouterVehicule(moto2);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
+        // Affichage de tous les véhicules
+        System.out.println("\n=== Affichage de tous les véhicules ===");
+        service.afficherVehicules(null);
 
-        // Affichage de toutes les voitures
-        System.out.println("\nAffichage de toutes les voitures :");
-        service.afficherVoitures(null);
+        // Affichage des véhicules DISPONIBLES uniquement
+        System.out.println("\n=== Affichage des véhicules DISPONIBLES ===");
+        service.afficherVehicules(Statut.DISPONIBLE);
 
-        // Affichage des voitures DISPONIBLE
-        System.out.println("\nAffichage des voitures DISPONIBLE :");
-        service.afficherVoitures(Statut.DISPONIBLE);
-
-        // Test ajout d'une voiture existante avec immatriculation
+        // Test d'ajout d'un véhicule avec une immatriculation existante
         try {
-            Voiture voitureDupliquee = new Voiture("BE9351", "Tesla", 2022, "SUV", Statut.DISPONIBLE, new Tarif(110, "CHF"), TypeMotorisation.ELECTRIQUE);
-            service.ajouterVoiture(voitureDupliquee);
+            Voiture voitureDupliquee = new Voiture(
+                    "BE9351",
+                    "Tesla",
+                    2022,
+                    "SUV",
+                    Statut.DISPONIBLE,
+                    new Tarif(110, "CHF"),
+                    TypeMotorisation.ELECTRIQUE);
+            service.ajouterVehicule(voitureDupliquee);
         } catch (IllegalArgumentException e) {
             System.out.println("\nException attrapée : " + e.getMessage());
         }
 
-        // Suppression d'une voiture (selon immatriculation)
+        // Suppression d'un camion
         try {
-            service.supprimerVoiture("JU24491");
+            service.supprimerVehicule("FR3344");
         } catch (IllegalArgumentException e) {
             System.out.println("\nException attrapée : " + e.getMessage());
         }
 
         // Affichage après suppression
-        System.out.println("\nAprès suppression d'une voiture :");
-        service.afficherVoitures(null);
+        System.out.println("\n=== Après suppression d'un véhicule ===");
+        service.afficherVehicules(null);
 
-        // Test suppression d'une voiture qui n'existe pas
+        // Test de suppression d'un véhicule inexistant
         try {
-            service.supprimerVoiture("XX9999");
+            service.supprimerVehicule("XX9999");
         } catch (IllegalArgumentException e) {
             System.out.println("\nException attrapée : " + e.getMessage());
         }
+
         // Test d'index invalide sur ArrayList (IndexOutOfBoundsException)
-        List<Voiture> listeTest = new ArrayList<>();
+        List<Vehicule> listeTest = new ArrayList<>();
         try {
-            // Tentative d'ajout à l'index 1 dans une liste vide
             listeTest.add(1, new Voiture(
                     "TEST123",
                     "Voiture Test",
@@ -103,7 +143,7 @@ public class CarLocApp {
                     new Tarif(50, "CHF"),
                     TypeMotorisation.THERMIQUE));
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Exception attrapée : " + e.getMessage());
+            System.out.println("\nException attrapée : " + e.getMessage());
         }
     }
 }

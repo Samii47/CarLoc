@@ -1,7 +1,7 @@
 package ch.hearc.ig.carloc.service;
 
 import ch.hearc.ig.carloc.business.Statut;
-import ch.hearc.ig.carloc.business.Voiture;
+import ch.hearc.ig.carloc.business.Vehicule;
 
 /**
  * Interface définissant les fonctionnalités principales du service de gestion des véhicules
@@ -12,23 +12,23 @@ import ch.hearc.ig.carloc.business.Voiture;
 public interface VehiculeServiceInterface {
 
     /**
-     * Ajoute une voiture au parc de véhicules
+     * Ajoute un véhicule au parc de véhicules
      *
-     * @param voiture La voiture à ajouter
+     * @param vehicule Le véhicule à ajouter
      */
-    void ajouterVoiture(Voiture voiture);
+    void ajouterVehicule(Vehicule vehicule);
 
     /**
-     * Supprime une voiture du parc en se basant sur son immatriculation
+     * Supprime un véhicule du parc en se basant sur son immatriculation
      *
-     * @param immatriculation L'immatriculation de la voiture à supprimer
+     * @param immatriculation L'immatriculation du véhicule à supprimer
      */
-    void supprimerVoiture(String immatriculation);
+    void supprimerVehicule(String immatriculation);
 
     /**
-     * Affiche les voitures du parc, avec possibilité de filtrer par statut
+     * Affiche les véhicules du parc, avec possibilité de filtrer par statut
      *
-     * @param statut Le statut pour filtrer (null pour afficher toutes les voitures)
+     * @param statut Le statut pour filtrer (null pour afficher tous les véhicules)
      */
-    void afficherVoitures(Statut statut);
+    void afficherVehicules(Statut statut);
 }

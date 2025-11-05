@@ -118,6 +118,27 @@ public abstract class Vehicule {
     }
 
     /**
+     * Retourne le type spécifique du véhicule
+     *
+     * @return Le type de véhicule (ex: "Voiture", "Camion", "Moto")
+     */
+    public abstract String getTypeVehicule();
+
+    /**
+     * Indique si le véhicule nécessite un permis de conduire spécial
+     *
+     * @return true si un permis spécial est requis, false sinon
+     */
+    public abstract boolean necessitePermisSpecial();
+
+    /**
+     * Retourne la capacité maximale de passagers du véhicule
+     *
+     * @return Le nombre maximum de passagers
+     */
+    public abstract int getCapacitePassagers();
+
+    /**
      * Compare ce véhicule avec un autre objet pour vérifier l'égalité
      * Deux véhicules sont égaux s'ils ont la même immatriculation
      *

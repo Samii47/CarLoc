@@ -22,6 +22,36 @@ public class Voiture extends Vehicule {
     }
 
     /**
+     * Retourne le type de véhicule
+     *
+     * @return "Voiture"
+     */
+    @Override
+    public String getTypeVehicule() {
+        return "Voiture";
+    }
+
+    /**
+     * Une voiture standard ne nécessite pas de permis spécial
+     *
+     * @return false
+     */
+    @Override
+    public boolean necessitePermisSpecial() {
+        return false;
+    }
+
+    /**
+     * Retourne la capacité standard d'une voiture
+     *
+     * @return 5 passagers
+     */
+    @Override
+    public int getCapacitePassagers() {
+        return 5;
+    }
+
+    /**
      * Retourne une représentation textuelle de la voiture
      *
      * @return Une chaîne contenant toutes les informations de la voiture
