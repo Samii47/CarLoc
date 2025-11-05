@@ -6,9 +6,9 @@ package ch.hearc.ig.carloc.business;
  * @author Sami.Cögür
  */
 public abstract class Vehicule {
-    private String immatriculation;
-    private String marque;
-    private int annee;
+    private final String immatriculation;
+    private final String marque;
+    private final int annee;
     private Categorie categorie;
     private Statut statut;
     private Tarif tarif;
