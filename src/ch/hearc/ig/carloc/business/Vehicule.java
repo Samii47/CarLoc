@@ -37,6 +37,28 @@ public abstract class Vehicule {
     }
 
     /**
+     * Valide l'immatriculation du véhicule selon les règles métier
+     *
+     * @throws ImmatriculationInvalideException si l'immatriculation ne respecte pas les règles
+     */
+    public void validerImmatriculation() throws ImmatriculationInvalideException {
+        // Validation : immatriculation vide ou nulle
+        if (immatriculation == null || immatriculation.trim().isEmpty()) {
+            throw new ImmatriculationInvalideException("L'immatriculation ne peut pas être vide");
+        }
+
+        // Validation : longueur minimale
+        if (immatriculation.length() < 4) {
+            throw new ImmatriculationInvalideException("L'immatriculation doit contenir au moins 4 caractères (reçu: '" + immatriculation + "')");
+        }
+
+        // Validation : longueur maximale
+        if (immatriculation.length() > 10) {
+            throw new ImmatriculationInvalideException("L'immatriculation ne peut pas dépasser 10 caractères (reçu: '" + immatriculation + "')");
+        }
+    }
+
+    /**
      * Retourne l'immatriculation du véhicule
      *
      * @return L'immatriculation

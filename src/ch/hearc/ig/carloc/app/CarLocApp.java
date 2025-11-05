@@ -10,6 +10,7 @@ import ch.hearc.ig.carloc.business.Vehicule;
 import ch.hearc.ig.carloc.service.VehiculeService;
 import ch.hearc.ig.carloc.datastructure.ArrayList;
 import ch.hearc.ig.carloc.datastructure.List;
+import ch.hearc.ig.carloc.business.ImmatriculationInvalideException;
 
 /**
  * Classe principale de l'App CarLoc.
@@ -78,7 +79,7 @@ public class CarLocApp {
                 new Tarif(65, "CHF"),
                 TypeMotorisation.ELECTRIQUE);
 
-        // Ajout des véhicules au parc (POLYMORPHISME : tous traités comme des Vehicule)
+// Ajout des véhicules au parc (POLYMORPHISME : tous traités comme des Vehicule)
         try {
             service.ajouterVehicule(voiture1);
             service.ajouterVehicule(voiture2);
@@ -86,6 +87,8 @@ public class CarLocApp {
             service.ajouterVehicule(camion2);
             service.ajouterVehicule(moto1);
             service.ajouterVehicule(moto2);
+        } catch (ImmatriculationInvalideException e) {
+            System.out.println("Exception attrapée : " + e.getMessage());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -99,6 +102,7 @@ public class CarLocApp {
         service.afficherVehicules(Statut.DISPONIBLE);
 
         // Test d'ajout d'un véhicule avec une immatriculation existante
+        System.out.println("\n=== Test d'immatriculation dupliquée ===");
         try {
             Voiture voitureDupliquee = new Voiture(
                     "BE9351",
@@ -109,8 +113,26 @@ public class CarLocApp {
                     new Tarif(110, "CHF"),
                     TypeMotorisation.ELECTRIQUE);
             service.ajouterVehicule(voitureDupliquee);
+        } catch (ImmatriculationInvalideException e) {
+            System.out.println("Exception attrapée : " + e.getMessage()); // MAIN
         } catch (IllegalArgumentException e) {
-            System.out.println("\nException attrapée : " + e.getMessage());
+            System.out.println("Exception attrapée : " + e.getMessage()); // MAIN
+        }
+
+        // Test d'ajout d'un véhicule avec une immatriculation INVALIDE (pour tester l'exception)
+        System.out.println("\n=== Test d'immatriculation invalide ===");
+        try {
+            Voiture voitureInvalide = new Voiture(
+                    "AB",  // Immatriculation trop courte !
+                    "Tesla",
+                    2023,
+                    "ELECTRIQUE",
+                    Statut.DISPONIBLE,
+                    new Tarif(100, "CHF"),
+                    TypeMotorisation.ELECTRIQUE);
+            service.ajouterVehicule(voitureInvalide);
+        } catch (ImmatriculationInvalideException e) {
+            System.out.println("Exception attrapée : " + e.getMessage()); // MAIN
         }
 
         // Suppression d'un camion

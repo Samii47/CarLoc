@@ -4,6 +4,7 @@ import ch.hearc.ig.carloc.business.Vehicule;
 import ch.hearc.ig.carloc.business.Statut;
 import ch.hearc.ig.carloc.datastructure.ArrayList;
 import ch.hearc.ig.carloc.datastructure.List;
+import ch.hearc.ig.carloc.business.ImmatriculationInvalideException;
 
 /**
  * Service de gestion du parc de véhicules
@@ -26,11 +27,21 @@ public class VehiculeService implements VehiculeServiceInterface {
      * avec la même immatriculation existe déjà
      */
     @Override
-    public void ajouterVehicule(Vehicule vehicule) {
+    public void ajouterVehicule(Vehicule vehicule) throws ImmatriculationInvalideException {
+
         // Vérification : vehicule null
         if (vehicule == null) {
             throw new IllegalArgumentException("Impossible d'ajouter un véhicule nul.");
         }
+
+        // Validation métier : vérification de l'immatriculation (COUCHE BUSINESS)
+        try {
+            vehicule.validerImmatriculation();
+        } catch (ImmatriculationInvalideException e) {
+            // On attrape l'exception de la couche business et on la rejette vers la couche application
+            throw e;
+        }
+
 
         // Vérification : véhicule déjà existant (même immatriculation)
         for (int i = 0; i < vehicules.size(); i++) {
