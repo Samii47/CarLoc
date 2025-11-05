@@ -12,6 +12,7 @@ import ch.hearc.ig.carloc.datastructure.ArrayList;
 import ch.hearc.ig.carloc.datastructure.List;
 import ch.hearc.ig.carloc.business.ImmatriculationInvalideException;
 import ch.hearc.ig.carloc.business.Categorie;
+import ch.hearc.ig.carloc.service.VehiculeServiceInterface;
 
 /**
  * Classe principale de l'App CarLoc.
@@ -23,7 +24,7 @@ import ch.hearc.ig.carloc.business.Categorie;
 public class CarLocApp {
     public static void main(String[] args) {
 
-        VehiculeService service = new VehiculeService();
+        VehiculeServiceInterface service = new VehiculeService();
 
         // Création de différents types de véhicules (POLYMORPHISME !)
         Voiture voiture1 = new Voiture(
