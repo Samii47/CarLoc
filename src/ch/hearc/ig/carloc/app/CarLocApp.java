@@ -11,6 +11,7 @@ import ch.hearc.ig.carloc.service.VehiculeService;
 import ch.hearc.ig.carloc.datastructure.ArrayList;
 import ch.hearc.ig.carloc.datastructure.List;
 import ch.hearc.ig.carloc.business.ImmatriculationInvalideException;
+import ch.hearc.ig.carloc.business.Categorie;
 
 /**
  * Classe principale de l'App CarLoc.
@@ -29,7 +30,7 @@ public class CarLocApp {
                 "BE9351",
                 "Audi",
                 2015,
-                "CITADINE",
+                Categorie.CITADINE,
                 Statut.DISPONIBLE,
                 new Tarif(45, "CHF"),
                 TypeMotorisation.THERMIQUE);
@@ -38,7 +39,7 @@ public class CarLocApp {
                 "JU24491",
                 "BMW",
                 2025,
-                "SUV",
+                Categorie.SUV,
                 Statut.LOUEE,
                 new Tarif(60, "CHF"),
                 TypeMotorisation.HYBRIDE);
@@ -47,7 +48,7 @@ public class CarLocApp {
                 "VD7788",
                 "Volvo",
                 2020,
-                "POIDS LOURD",
+                Categorie.POIDS_LOURD,
                 Statut.DISPONIBLE,
                 new Tarif(120, "CHF"),
                 TypeMotorisation.THERMIQUE);
@@ -56,7 +57,7 @@ public class CarLocApp {
                 "FR3344",
                 "MAN",
                 2022,
-                "UTILITAIRE",
+                Categorie.UTILITAIRE,
                 Statut.EN_MAINTENANCE,
                 new Tarif(95, "CHF"),
                 TypeMotorisation.THERMIQUE);
@@ -65,7 +66,7 @@ public class CarLocApp {
                 "GE5566",
                 "Harley-Davidson",
                 2023,
-                "SPORTIVE",
+                Categorie.SPORTIVE,
                 Statut.DISPONIBLE,
                 new Tarif(75, "CHF"),
                 TypeMotorisation.THERMIQUE);
@@ -74,7 +75,7 @@ public class CarLocApp {
                 "NE9988",
                 "Yamaha",
                 2024,
-                "ROUTIERE",
+                Categorie.SPORTIVE,
                 Statut.LOUEE,
                 new Tarif(65, "CHF"),
                 TypeMotorisation.ELECTRIQUE);
@@ -108,7 +109,7 @@ public class CarLocApp {
                     "BE9351",
                     "Tesla",
                     2022,
-                    "SUV",
+                    Categorie.SUV,
                     Statut.DISPONIBLE,
                     new Tarif(110, "CHF"),
                     TypeMotorisation.ELECTRIQUE);
@@ -126,7 +127,7 @@ public class CarLocApp {
                     "AB",  // Immatriculation trop courte !
                     "Tesla",
                     2023,
-                    "ELECTRIQUE",
+                    Categorie.CITADINE,
                     Statut.DISPONIBLE,
                     new Tarif(100, "CHF"),
                     TypeMotorisation.ELECTRIQUE);
@@ -160,7 +161,7 @@ public class CarLocApp {
                     "TEST123",
                     "Voiture Test",
                     2020,
-                    "TEST",
+                    Categorie.BERLINE,
                     Statut.DISPONIBLE,
                     new Tarif(50, "CHF"),
                     TypeMotorisation.THERMIQUE));

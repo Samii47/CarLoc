@@ -17,7 +17,7 @@ public class Voiture extends Vehicule {
      * @param tarif Le tarif de location journalier
      * @param typeMotorisation Le type de motorisation de la voiture
      */
-    public Voiture(String immatriculation, String marque, int annee, String categorie, Statut statut, Tarif tarif, TypeMotorisation typeMotorisation) {
+    public Voiture(String immatriculation, String marque, int annee, Categorie categorie, Statut statut, Tarif tarif, TypeMotorisation typeMotorisation) {
         super(immatriculation, marque, annee, categorie, statut, tarif, typeMotorisation);
     }
 

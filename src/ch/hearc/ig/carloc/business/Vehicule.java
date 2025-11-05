@@ -9,7 +9,7 @@ public abstract class Vehicule {
     private String immatriculation;
     private String marque;
     private int annee;
-    private String categorie;
+    private Categorie categorie;
     private Statut statut;
     private Tarif tarif;
     private TypeMotorisation typeMotorisation;
@@ -26,7 +26,7 @@ public abstract class Vehicule {
      * @param tarif Le tarif de location journalier
      * @param typeMotorisation Le type de motorisation du véhicule
      */
-    public Vehicule(String immatriculation, String marque, int annee, String categorie, Statut  statut, Tarif tarif, TypeMotorisation typeMotorisation) {
+    public Vehicule(String immatriculation, String marque, int annee, Categorie categorie, Statut  statut, Tarif tarif, TypeMotorisation typeMotorisation) {
         this.immatriculation = immatriculation;
         this.marque = marque;
         this.annee = annee;
@@ -90,7 +90,7 @@ public abstract class Vehicule {
      *
      * @return La catégorie
      */
-    public String getCategorie() {
+    public Categorie getCategorie() {
         return categorie;
     }
 
